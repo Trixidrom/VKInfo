@@ -8,6 +8,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.net.URL;
+
+import static com.example.vkinfo.utils.NetworkUtils.generateURL;
+
 public class MainActivity extends AppCompatActivity {
     private EditText searchField;
     private Button searchButton;
@@ -21,15 +25,12 @@ public class MainActivity extends AppCompatActivity {
         searchField = findViewById(R.id.et_search_field);
         searchButton = findViewById(R.id.b_search_vk);
         result = findViewById(R.id.tv_result);
-        searchButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                result.setText("Нажали кнопку");
-            }
-
+        searchButton.setOnClickListener(view -> {
+            URL gereratedURL = generateURL(searchField.getText().toString());
+            result.setText(gereratedURL.toString());
         });
 
-    }
+     }
 
 
 }

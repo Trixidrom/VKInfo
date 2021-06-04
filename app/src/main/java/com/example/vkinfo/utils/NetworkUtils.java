@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.Scanner;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -39,7 +40,7 @@ public class NetworkUtils {
         try{
             InputStream in = urlConnection.getInputStream();
             Scanner scanner = new Scanner(in);
-            scanner.useDelimiter("\\A ");
+            scanner.useDelimiter("\\A");
 
             boolean hasInput = scanner.hasNext();
             if(hasInput){
@@ -47,10 +48,10 @@ public class NetworkUtils {
             }else{
                 return null;
             }
-        }finally {
+        }catch (UnknownHostException e){
+          return null;
+        } finally {
             urlConnection.disconnect();
         }
-
-
     }
 }
